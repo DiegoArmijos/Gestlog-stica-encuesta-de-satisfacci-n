@@ -414,3 +414,72 @@ textarea::placeholder {
 .escala-error button {
     border-color: #E24B4A !important;
 }
+
+/* ── RESPONSIVE MÓVIL ── */
+@media (max-width: 768px) {
+
+    header {
+        height: 100px;
+    }
+
+    .page-wrapper {
+        padding: 24px 16px 40px;
+    }
+
+    /* Robots ocultos en móvil — no hay espacio */
+    .robot-left, .robot-right {
+        display: none;
+    }
+
+    .container {
+        border-radius: 16px;
+    }
+
+    .card-header {
+        padding: 24px 20px 20px;
+    }
+
+    .card-header h2 {
+        font-size: 22px;
+    }
+
+    .card-header p {
+        font-size: 13px;
+    }
+
+    .card-body {
+        padding: 24px 20px 28px;
+    }
+
+    .pregunta {
+        margin-bottom: 28px;
+    }
+
+    .pregunta-label {
+        font-size: 14px;
+    }
+
+    /* Escala: 2 filas de 5 en móvil */
+    .escala {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .escala button {
+        flex: 1 1 calc(20% - 8px);
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    .btn-submit {
+        margin-top: 24px;
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .card-footer {
+        padding: 12px 20px 16px;
+    }
+}
