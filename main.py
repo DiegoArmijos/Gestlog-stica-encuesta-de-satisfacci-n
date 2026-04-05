@@ -42,7 +42,7 @@ def enviar():
     hoja.append_row([fecha, pregunta1, comentario1, pregunta2, comentario2])
 
     # ... (el resto de tu HTML de "Gracias" se mantiene igual) ...
-    return """<!DOCTYPE html>...""" # Todo tu HTML largo aquí
+    return render_template("gracias.html", pregunta1=pregunta1, pregunta2=pregunta2)
 
 if __name__ == "__main__":
     # Importante: Render usa la variable PORT, si no la encuentra usa 8000

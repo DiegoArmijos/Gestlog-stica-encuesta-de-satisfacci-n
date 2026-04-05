@@ -196,6 +196,8 @@ header::after {
 
 .escala button {
     flex: 1;
+    width: 0;               /* fuerza que flex calcule el ancho */
+    min-height: 44px;       /* altura mínima garantizada */
     aspect-ratio: 1;
     border: 1.5px solid #E5E5E5;
     background: #FAFAFA;
@@ -208,6 +210,10 @@ header::after {
     transition: all 0.18s ease;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .escala button::before {
@@ -255,8 +261,13 @@ header::after {
 .textarea-wrapper {
     margin-top: 16px;
     position: relative;
-    display: none;
+    display: none;          /* oculto por defecto, JS lo muestra */
     animation: slideDown 0.25s ease;
+}
+
+/* Cuando el JS lo activa */
+.textarea-wrapper.visible {
+    display: block;
 }
 
 @keyframes slideDown {
@@ -364,6 +375,7 @@ textarea::placeholder {
     font-weight: 300;
 }
 
+/* ── ANIMACIONES ROBOTS ── */
 @keyframes entrarRobot {
     from { opacity: 0; transform: translateY(60px); }
     to   { opacity: 1; transform: translateY(0); }

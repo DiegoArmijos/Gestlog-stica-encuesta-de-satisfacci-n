@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias! – GestLogística</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* ── PÁGINA GRACIAS ── */
+        .gracias-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 164px);
+            padding: 48px 24px 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fondo con ondas sutiles */
+        .gracias-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(94,190,130,0.10) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .gracias-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            right: -40px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(10,15,143,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ── CARD ── */
+        .gracias-card {
+            width: 100%;
+            max-width: 560px;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 48px rgba(10,15,143,0.10), 0 1px 4px rgba(0,0,0,0.04);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            animation: cardEntrar 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes cardEntrar {
+            from { opacity: 0; transform: translateY(32px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Franja superior */
+        .gracias-top {
+            background: linear-gradient(135deg, #0A0F8F 0%, #221D5C 100%);
+            padding: 40px 40px 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Círculos decorativos de fondo */
+        .gracias-top::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            background: rgba(94,190,130,0.12);
+        }
+        .gracias-top::after {
+            content: '';
+            position: absolute;
+            bottom: 20px; left: -30px;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+        }
+
+        /* Badge */
+        .gracias-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(94,190,130,0.18);
+            border: 1px solid rgba(94,190,130,0.4);
+            color: #5EBE82;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 14px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+            position: relative;
+            animation: cardEntrar 0.6s 0.15s both;
+        }
+
+        /* Robot */
+        .robot-gracias {
+            width: 200px;
+            height: auto;
+            display: block;
+            position: relative;
+            animation: robotSubir 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both,
+                       flotarRobot 4s ease-in-out 1s infinite;
+            filter: drop-shadow(0 16px 32px rgba(10,15,143,0.25));
+        }
+
+        @keyframes robotSubir {
+            from { opacity: 0; transform: translateY(40px) scale(0.9); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes flotarRobot {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-12px); }
+        }
+
+        /* ── CUERPO ── */
+        .gracias-body {
+            padding: 36px 40px 40px;
+            text-align: center;
+        }
+
+        /* Icono check */
+        .check-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5EBE82, #3aa863);
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(94,190,130,0.35);
+            animation: checkEntrar 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.5s both;
+        }
+
+        @keyframes checkEntrar {
+            from { opacity: 0; transform: scale(0.3); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        .check-circle svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .gracias-body h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 30px;
+            font-weight: 400;
+            color: #1a1a2e;
+            margin-bottom: 14px;
+            animation: cardEntrar 0.5s 0.4s both;
+        }
+
+        .gracias-body .mensaje {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.7;
+            max-width: 400px;
+            margin: 0 auto 28px;
+            font-weight: 300;
+            animation: cardEntrar 0.5s 0.5s both;
+        }
+
+        .gracias-body .mensaje strong {
+            color: #0A0F8F;
+            font-weight: 600;
+        }
+
+        /* Tarjetas de datos */
+        .datos-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+            animation: cardEntrar 0.5s 0.6s both;
+        }
+
+        .dato-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #F7F7FD;
+            border: 1.5px solid #E5E5F5;
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 13px;
+            color: #444;
+            font-weight: 500;
+        }
+
+        .dato-chip .chip-num {
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px;
+            color: #0A0F8F;
+            font-weight: 400;
+        }
+
+        .dato-chip .chip-label {
+            font-size: 11px;
+            color: #888;
+            font-weight: 400;
+            display: block;
+            text-align: left;
+        }
+
+        /* Línea decorativa */
+        .gracias-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #E5E5E5, transparent);
+            margin: 0 0 28px;
+        }
+
+        /* Mensaje final */
+        .cierre {
+            font-size: 13px;
+            color: #aaa;
+            font-weight: 300;
+            line-height: 1.6;
+            animation: cardEntrar 0.5s 0.7s both;
+        }
+
+        .cierre span {
+            color: #5EBE82;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .gracias-footer {
+            padding: 14px 40px 18px;
+            border-top: 1px solid #F0EEE9;
+            text-align: center;
+        }
+
+        .gracias-footer p {
+            font-size: 12px;
+            color: #bbb;
+            font-weight: 300;
+        }
+
+        /* Estrellas decorativas flotantes */
+        .star {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            animation: starParpadeo 3s ease-in-out infinite;
+        }
+        .star:nth-child(1) { top: 18%; left: 8%;  font-size: 18px; animation-delay: 0s; }
+        .star:nth-child(2) { top: 35%; right: 6%; font-size: 13px; animation-delay: 1.2s; }
+        .star:nth-child(3) { top: 60%; left: 5%;  font-size: 10px; animation-delay: 0.6s; }
+        .star:nth-child(4) { top: 70%; right: 9%; font-size: 16px; animation-delay: 1.8s; }
+
+        @keyframes starParpadeo {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50%       { opacity: 0.6; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <img src="{{ url_for('static', filename='assets/logo1.svg') }}" alt="GestLogística">
+    </div>
+</header>
+
+<div class="gracias-wrapper">
+    <!-- Estrellas decorativas -->
+    <span class="star">✦</span>
+    <span class="star">✦</span>
+    <span class="star">✦</span>
+    <span class="star">✦</span>
+
+    <div class="gracias-card">
+
+        <!-- Franja azul con robot -->
+        <div class="gracias-top">
+            <div class="gracias-badge">
+                <span class="badge-dot"></span>
+                Encuesta completada
+            </div>
+            <img
+                src="{{ url_for('static', filename='assets/robot-gestlogistica1.png') }}"
+                class="robot-gracias"
+                alt="Robot GestLogística"
+            >
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="gracias-body">
+
+            <div class="check-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+
+            <h2>¡Muchas gracias!</h2>
+
+            <p class="mensaje">
+                Su opinión es el motor que nos impulsa a seguir mejorando.<br>
+                En <strong>GestLogística</strong> cada respuesta cuenta — y la suya
+                nos ayuda a construir un servicio que realmente marque la diferencia.
+            </p>
+
+            <!-- Chips con las calificaciones enviadas -->
+            <div class="datos-row">
+                <div class="dato-chip">
+                    <div>
+                        <span class="chip-num">{{ pregunta1 }}</span>
+                        <span class="chip-label">Desempeño del equipo</span>
+                    </div>
+                </div>
+                <div class="dato-chip">
+                    <div>
+                        <span class="chip-num">{{ pregunta2 }}</span>
+                        <span class="chip-label">Probabilidad de recomendación</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gracias-divider"></div>
+
+            <p class="cierre">
+                Sus respuestas han sido registradas de forma segura.<br>
+                <span>¡Hasta la próxima! 🚀</span>
+            </p>
+
+        </div>
+
+        <div class="gracias-footer">
+            <p>Sus respuestas son confidenciales y serán usadas únicamente para mejorar nuestro servicio.</p>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
