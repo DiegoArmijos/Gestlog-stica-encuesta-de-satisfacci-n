@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de Satisfacción – GestLogística</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <img src="{{ url_for('static', filename='assets/logo1.svg') }}" alt="GestLogística">
+    </div>
+</header>
+
+<div class="page-wrapper">
+<img src="{{ url_for('static', filename='assets/rebot-gestlogistica2.png') }}" class="robot-left" alt="">
+<img src="{{ url_for('static', filename='assets/rebot-gestlogistica2.png') }}" class="robot-right" alt="">
+    <div class="container">
+
+        <div class="card-header">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Encuesta activa
+            </div>
+            <h2>Encuesta de Satisfacción</h2>
+            <p>Su opinión es importante para nosotros. Esta encuesta le tomará menos de 2 minutos.</p>
+        </div>
+
+        <div class="card-body">
+            <form action="/enviar" method="post">
+
+                <div class="pregunta">
+                    <p class="pregunta-label">¿Cómo calificaría el desempeño de nuestro equipo?</p>
+                    <p class="pregunta-hint">1 = Muy malo &nbsp;·&nbsp; 10 = Excelente</p>
+                    <div class="escala" id="escala1"></div>
+                    <div class="textarea-wrapper" id="wrapper-comentario1">
+                        <label>Cuéntenos qué podríamos mejorar</label>
+                        <textarea name="comentario1" id="comentario1"
+                            placeholder="Su opinión nos ayuda a crecer..."></textarea>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="pregunta">
+                    <p class="pregunta-label">¿Qué tan probable es que recomiende nuestro servicio?</p>
+                    <p class="pregunta-hint">1 = Nada probable &nbsp;·&nbsp; 10 = Muy probable</p>
+                    <div class="escala" id="escala2"></div>
+                    <div class="textarea-wrapper" id="wrapper-comentario2">
+                        <label>¿Qué razón le impediría recomendarnos?</label>
+                        <textarea name="comentario2" id="comentario2"
+                            placeholder="Comparta su experiencia con nosotros..."></textarea>
+                    </div>
+                </div>
+
+                <input type="hidden" name="pregunta1" id="valor1">
+                <input type="hidden" name="pregunta2" id="valor2">
+                
+                <div id="aviso-validacion" style="display:none; background:#fff0f0; border: 1.5px solid #E24B4A; color:#A32D2D; border-radius:10px; padding:12px 16px; font-size:13px; margin-bottom:16px; text-align:center;">
+                    ⚠️ Por favor seleccione una calificación en todas las preguntas.
+                </div>
+                <button type="submit" class="btn-submit">
+                    Enviar encuesta <span class="btn-icon">→</span>
+                </button>
+
+            </form>
+        </div>
+
+        <div class="card-footer">
+            <p>Sus respuestas son confidenciales y serán usadas únicamente para mejorar nuestro servicio.</p>
+        </div>
+
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
