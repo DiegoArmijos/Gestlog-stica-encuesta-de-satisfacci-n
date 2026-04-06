@@ -1,73 +1,77 @@
-// ── Crear escalas PRIMERO para que existan los botones ──
-crearEscala("escala1", "valor1", "wrapper-comentario1");
-crearEscala("escala2", "valor2", "wrapper-comentario2");
+document.addEventListener("DOMContentLoaded", function () {
 
-function crearEscala(idEscala, idInput, idWrapper) {
-    const contenedor = document.getElementById(idEscala);
+    // ── Crear escalas ──
+    crearEscala("escala1", "valor1", "wrapper-comentario1");
+    crearEscala("escala2", "valor2", "wrapper-comentario2");
 
-    for (let i = 1; i <= 10; i++) {
-        const btn = document.createElement("button");
-        btn.innerHTML = `<span>${i}</span>`;
-        btn.type = "button";
+    // ── Botón enviar desactivado hasta responder todo ──
+    const btnSubmit = document.querySelector(".btn-submit");
+    btnSubmit.style.opacity = "0.5";
+    btnSubmit.style.cursor  = "not-allowed";
 
-        btn.onclick = function () {
-            document.getElementById(idInput).value = i;
-
-            contenedor.querySelectorAll("button")
-                      .forEach(b => b.classList.remove("seleccionado"));
-            btn.classList.add("seleccionado");
-
-            const wrapper = document.getElementById(idWrapper);
-
-            if (i <= 8) {
-                wrapper.style.display = "block";
-                wrapper.querySelector("textarea").required = true;
-            } else {
-                wrapper.style.display = "none";
-                wrapper.querySelector("textarea").required = false;
-                wrapper.querySelector("textarea").value = "";
-            }
-
-            verificarBoton();
-        };
-
-        contenedor.appendChild(btn);
+    function verificarBoton() {
+        const val1 = document.getElementById("valor1").value;
+        const val2 = document.getElementById("valor2").value;
+        const listo = val1 && val2;
+        btnSubmit.style.opacity = listo ? "1"       : "0.5";
+        btnSubmit.style.cursor  = listo ? "pointer" : "not-allowed";
     }
-}
 
-// ── Botón enviar desactivado hasta responder todo ──
-const btnSubmit = document.querySelector(".btn-submit");
-btnSubmit.style.opacity = "0.5";
-btnSubmit.style.cursor  = "not-allowed";
+    // ── Validación al enviar ──
+    document.querySelector("form").addEventListener("submit", function (e) {
+        const val1 = document.getElementById("valor1").value;
+        const val2 = document.getElementById("valor2").value;
 
-function verificarBoton() {
-    const val1 = document.getElementById("valor1").value;
-    const val2 = document.getElementById("valor2").value;
+        if (!val1 || !val2) {
+            e.preventDefault();
+            if (!val1) resaltarEscala("escala1");
+            if (!val2) resaltarEscala("escala2");
 
-    const listo = val1 && val2;
-    btnSubmit.style.opacity = listo ? "1"           : "0.5";
-    btnSubmit.style.cursor  = listo ? "pointer"     : "not-allowed";
-}
+            const aviso = document.getElementById("aviso-validacion");
+            aviso.style.display = "block";
+            setTimeout(() => aviso.style.display = "none", 3500);
+        }
+    });
 
-// ── Validación al enviar ──
-document.querySelector("form").addEventListener("submit", function (e) {
-    const val1 = document.getElementById("valor1").value;
-    const val2 = document.getElementById("valor2").value;
-
-    if (!val1 || !val2) {
-        e.preventDefault();
-
-        if (!val1) resaltarEscala("escala1");
-        if (!val2) resaltarEscala("escala2");
-
-        const aviso = document.getElementById("aviso-validacion");
-        aviso.style.display = "block";
-        setTimeout(() => aviso.style.display = "none", 3500);
+    function resaltarEscala(idEscala) {
+        const contenedor = document.getElementById(idEscala);
+        contenedor.classList.add("escala-error");
+        setTimeout(() => contenedor.classList.remove("escala-error"), 1500);
     }
+
+    function crearEscala(idEscala, idInput, idWrapper) {
+        const contenedor = document.getElementById(idEscala);
+        if (!contenedor) return;
+
+        for (let i = 1; i <= 5; i++) {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.innerHTML = "<span>" + i + "</span>";
+
+            btn.addEventListener("click", function () {
+                document.getElementById(idInput).value = i;
+
+                contenedor.querySelectorAll("button")
+                          .forEach(function(b) { b.classList.remove("seleccionado"); });
+                btn.classList.add("seleccionado");
+
+                const wrapper = document.getElementById(idWrapper);
+                const textarea = wrapper.querySelector("textarea");
+
+                if (i <= 3) {
+                    wrapper.style.display = "block";
+                    textarea.required = true;
+                } else {
+                    wrapper.style.display = "none";
+                    textarea.required = false;
+                    textarea.value = "";
+                }
+
+                verificarBoton();
+            });
+
+            contenedor.appendChild(btn);
+        }
+    }
+
 });
-
-function resaltarEscala(idEscala) {
-    const contenedor = document.getElementById(idEscala);
-    contenedor.classList.add("escala-error");
-    setTimeout(() => contenedor.classList.remove("escala-error"), 1500);
-}
