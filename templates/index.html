@@ -58,7 +58,22 @@
 
                 <input type="hidden" name="pregunta1" id="valor1">
                 <input type="hidden" name="pregunta2" id="valor2">
+                <!-- Pega esto ANTES del div id="aviso-validacion" -->
+                <div class="pregunta" style="margin-top: 32px;">
+                    <p class="pregunta-label">¿Cuál es su nombre?</p>
+                    <p class="pregunta-hint">Campo obligatorio</p>
+                    <input
+                        type="text"
+                        name="nombre"
+                        id="nombre"
+                        placeholder="Ingrese su nombre completo..."
+                        autocomplete="name"
+                        required
+                    >
+                </div>
 
+                <div class="divider"></div>
+                
                 <div id="aviso-validacion" style="display:none; background:#fff0f0; border: 1.5px solid #E24B4A; color:#A32D2D; border-radius:10px; padding:12px 16px; font-size:13px; margin-bottom:16px; text-align:center;">
                     ⚠️ Por favor seleccione una calificación en todas las preguntas.
                 </div>

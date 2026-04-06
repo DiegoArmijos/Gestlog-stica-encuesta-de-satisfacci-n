@@ -31,17 +31,18 @@ hoja = cliente.open("Gestlogística reseñas").sheet1
 def inicio():
     return render_template("index.html")
 
+# Reemplaza la función enviar() con esta:
 @app.route("/enviar", methods=["POST"])
 def enviar():
-    pregunta1 = request.form["pregunta1"]
-    pregunta2 = request.form["pregunta2"]
+    nombre      = request.form.get("nombre", "").strip()
+    pregunta1   = request.form["pregunta1"]
+    pregunta2   = request.form["pregunta2"]
     comentario1 = request.form.get("comentario1", "")
     comentario2 = request.form.get("comentario2", "")
 
     fecha = datetime.now().strftime("%d/%m/%Y %H:%M")
-    hoja.append_row([fecha, pregunta1, comentario1, pregunta2, comentario2])
+    hoja.append_row([fecha, nombre, pregunta1, comentario1, pregunta2, comentario2])
 
-    # ... (el resto de tu HTML de "Gracias" se mantiene igual) ...
     return render_template("gracias.html", pregunta1=pregunta1, pregunta2=pregunta2)
 
 if __name__ == "__main__":

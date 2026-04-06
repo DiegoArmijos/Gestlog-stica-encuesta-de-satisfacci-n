@@ -483,3 +483,28 @@ textarea::placeholder {
         padding: 12px 20px 16px;
     }
 }
+
+/* ── INPUT TEXTO (nombre) ── */
+input[type="text"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #E5E5E5;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #1a1a2e;
+    background: #FAFAFA;
+    outline: none;
+    transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+input[type="text"]:focus {
+    border-color: #0A0F8F;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(10, 15, 143, 0.08);
+}
+
+input[type="text"]::placeholder {
+    color: #bbb;
+    font-weight: 300;
+}

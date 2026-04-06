@@ -9,13 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
     btnSubmit.style.opacity = "0.5";
     btnSubmit.style.cursor  = "not-allowed";
 
+// Reemplaza la función verificarBoton existente con esta:
     function verificarBoton() {
-        const val1 = document.getElementById("valor1").value;
-        const val2 = document.getElementById("valor2").value;
-        const listo = val1 && val2;
+        const val1   = document.getElementById("valor1").value;
+        const val2   = document.getElementById("valor2").value;
+        const nombre = document.getElementById("nombre").value.trim();
+        const listo  = val1 && val2 && nombre;
         btnSubmit.style.opacity = listo ? "1"       : "0.5";
         btnSubmit.style.cursor  = listo ? "pointer" : "not-allowed";
     }
+
+// Agrega este listener después de donde creas las escalas:
+document.getElementById("nombre").addEventListener("input", verificarBoton);
 
     // ── Validación al enviar ──
     document.querySelector("form").addEventListener("submit", function (e) {
